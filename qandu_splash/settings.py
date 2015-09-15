@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+ON_HEROKU = os.getenv('ON_HEROKU', False)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -24,7 +24,10 @@ MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '2h9$3-9-xnn0#!)v+n)e$+8(ci=$@8(r76so6h2tph4v3whv2t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ON_HEROKU == True:
+  DEBUG = False
+else:
+  DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -101,3 +104,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
